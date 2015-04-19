@@ -32,38 +32,72 @@ def resolve_dominants(song, key)
   song.each.with_index do |chord, i|
     if chord.class == Hash
       if chord.keys.include?(:V7_of_IV)
-        if next_chord(song) == :IVMaj7
-          analyzed_song << :V7_of_IV
-        else
-          analyzed_song << :I7
-        end
+        next_chord(song, i) == :IVMaj7 ? analyzed_song << :V7_of_IV : analyzed_song << :I7
+      else #if doesn't include
+        analyzed_song << chord
       end
-    end
+    else #if not hash
       analyzed_song << chord
-  end
+    end
+  end #each loop
   analyzed_song
 end
 
-def second_pass_analysis(song, key)
+def resolve_substitute_dominants(song, key)
+  #subv(not needed), subv/ii(not needed), subv/iii (vs IV7), subv/iv(not needed), subv/v(not needed), subv/vi(vs bVII7)
   analyzed_song = []
-  song.each.with_index do | chord, i |
+  song.each.with_index do |chord, i|
     if chord.class == Hash
-      if chord.keys.include?(:II_of_V)
-        if next_chord(song, i) == :V7_of_V
-          analyzed_song << :II_of_V
-        else
-          analyzed_song << :VImin7
-        end
-      elsif chord.keys.include?(:II_of_II)
-        if next_chord(song, i) == :V7_of_II
-          analyzed_song << :II_of_II
-        else
-          analyzed_song << :IIImin7
-        end
+      if chord.keys.include?(:sub_V7_of_III)
+        next_chord(song, i) == :IIImin7 ? analyzed_song << :sub_V7_of_III : analyzed_song << :IV7
+      elsif chord.keys.include?(:sub_V7_of_VI)
+        next_chord(song, i) == :VImin7 ? analyzed_song << :sub_V7_of_VI : analyzed_song << :bVII7
+      else #if not included
+        analyzed_song << chord
+      end
+    else #if not hash
+      analyzed_song << chord
+    end
+  end #each loop
+  analyzed_song
+end
+
+def resolve_subdominants(song, key)
+  #IImin7(not needed), II/III (not needed), II/IV(vs Vmin7), II/V (vs VImin7), II/VI(vs VIImin7b5)
+  analyzed_song = []
+  song.each.with_index do |chord, i|
+    if chord.class == Hash
+      if chord.keys.include?(:II_of_II)
+        next_chord(song, i) == :V7_of_II ? analyzed_song << :II_of_II : analyzed_song << :IIImin7
+      elsif chord.keys.include?(:II_of_IV)
+        next_chord(song, i) == :V7_of_IV ? analyzed_song << :II_of_IV : analyzed_song << :Vmin7
+      elsif chord.keys.include?(:II_of_V)
+        next_chord(song, i) == :V7_of_V ? analyzed_song << :II_of_V : analyzed_song << :VImin7
+      elsif chord.keys.include?(:II_of_VI)
+        next_chord(song, i) == :V7_of_VI ? analyzed_song << :II_of_VI : analyzed_song << :VIImin7b5
       else
-        analyzed_song << "no_match"
-      end 
-    else
+        analyzed_song << chord
+      end #cases
+    else #if not hash
+      analyzed_song << chord
+    end
+  end #each loop
+  analyzed_song
+end
+
+def resolve_substitute_subdominants(song, key)
+      #subII(not needed), subII/II(not needed), sub II/III(vs Imin7), sub II/IV(not needed), sub II/V(not needed), sub II/VI(IVmin)
+    analyzed_song = []
+    song.each.with_index do |chord, i|
+    if chord.class == Hash
+      if chord.keys.include?(:sub_II_of_III)
+        next_chord(song, i) == :sub_V7_of_III ? analyzed_song << :sub_II_of_III : analyzed_song << :Imin7
+      elsif chord.keys.include?(:sub_II_of_VI)
+        next_chord(song, i) == :sub_V7_of_VI ? analyzed_song << :sub_II_of_VI : analyzed_song << :IVmin7
+      else
+        analyzed_song << chord
+      end #cases
+    else #if not hash
       analyzed_song << chord
     end
   end
@@ -71,23 +105,31 @@ def second_pass_analysis(song, key)
 end
 
 def analyze(song, key)
-  #condense down to single chords and hashes of possible matches
   first_pass = first_pass_analysis(song, key)
   with_dominants = resolve_dominants(first_pass, key)
-  #1resolve secondary and 2substitute dominants
-  #3resolve secondary and 4substitute subdominants
-  with_dominants
+  with_substitute_dominants = resolve_substitute_dominants(with_dominants, key)
+  with_subdominants = resolve_subdominants(with_substitute_dominants, key)
+  with_sub_subdominants = resolve_substitute_subdominants(with_subdominants, key)
+  with_sub_subdominants
 end
 chords = Chords.new
 songs = Songs.new
 
-# first_pass = first_pass_analysis(songs.test_song, chords.key_of_c)
-# print "first pass: #{first_pass}"
+print songs.test_song_2
+puts ""
+# puts "First Pass:"
+# first_pass = first_pass_analysis(songs.test_song_2, chords.key_of_c)
+# print first_pass
+# with_dominants = resolve_dominants(first_pass, chords.key_of_c)
 # puts ""
-# second_pass = second_pass_analysis(first_pass, chords.key_of_c)
-# print "second pass: #{second_pass}"
+# puts "With Dominants:"
+# print with_dominants
+# with_substitute_dominants = resolve_substitute_dominants(with_dominants, chords.key_of_c)
 # puts ""
-# print "second pass transposed to C: #{transpose(second_pass, chords.key_of_c)}"
+# puts "With Substitute Dominants"
+# print with_substitute_dominants
 # puts ""
-# print "second pass transposed to F: #{transpose(second_pass, chords.key_of_f)}"
-
+# puts "With Subdominants"
+# with_subdominants = resolve_subdominants(with_substitute_dominants, chords.key_of_c)
+# print with_subdominants
+print analyze(songs.test_song_2, chords.key_of_c)

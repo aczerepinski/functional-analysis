@@ -11,4 +11,8 @@ class Songs
   def test_song
     ["CMaj7", "Amin7", "D7", "G7", "CMaj7", "Amin7", "CMaj7", "Emin7", "A7", "Dmin7", "Db7", "CMaj7"]
   end
+
+  def test_song_2
+    ["Bmin7b5", "E7", "Amin7", "Ab7", "Gmin7", "C7", "FMaj7", nil, "Emin7", "A7", "Dmin7", "G7", "Amin7", "Db7", "CMaj7"]
+  end
 end

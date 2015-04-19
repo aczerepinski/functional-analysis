@@ -13,6 +13,7 @@ class Chords
     :II_of_IV => "Gmin7",
     :V7_of_IV => "C7",
     :IVMaj7 => "FMaj7",
+    :IV7 => "F7",
     :II_of_V => "Amin7",
     :V7_of_V => "D7",
     :V7 => "G7",
@@ -27,21 +28,20 @@ class Chords
     :Vmin7 => "Gmin7",
     :bVIMaj7 => "AbMaj7",
     :bVII7 => "Bb7",
-    :subII => "Abmin7",
-    :subV7 => "Db7",
-    :subII_of_II => "Bbmin7",
-    :subV7_of_II => "Eb7",
-    :subII_of_III => "Cmin7",
-    :subV7_of_III => "F7",
-    :subII_of_IV => "Dbmin7",
-    :subV7_of_IV => "Gb7",
-    :subII_of_V => "Ebmin7",
-    :subV7_of_V => "Ab7",
-    :subII_of_VI => "Fmin7",
-    :subV7_of_VI => "Bb7"
+    :sub_II => "Abmin7",
+    :sub_V7 => "Db7",
+    :sub_II_of_II => "Bbmin7",
+    :sub_V7_of_II => "Eb7",
+    :sub_II_of_III => "Cmin7",
+    :sub_V7_of_III => "F7",
+    :sub_II_of_IV => "Dbmin7",
+    :sub_V7_of_IV => "Gb7",
+    :sub_II_of_V => "Ebmin7",
+    :sub_V7_of_V => "Ab7",
+    :sub_II_of_VI => "Fmin7",
+    :sub_V7_of_VI => "Bb7"
     }
   end
-
   def key_of_f
    {
     :IMaj7 => "FMaj7",
@@ -55,6 +55,7 @@ class Chords
     :II_of_IV => "Cmin7",
     :V7_of_IV => "F7",
     :IVMaj7 => "BbMaj7",
+    :IV7 => "Bb7",
     :II_of_V => "Dmin7",
     :V7_of_V => "G7",
     :V7 => "C7",
@@ -69,18 +70,18 @@ class Chords
     :Vmin7 => "Cmin7",
     :bVIMaj7 => "DbMaj7",
     :bVII7 => "Eb7",
-    :subII => "Dbmin7",
-    :subV7 => "Gb7",
-    :subII_of_II => "Ebmin7",
-    :subV7_of_II => "Ab7",
-    :subII_of_III => "Fmin7",
-    :subV7_of_III => "Bb7",
-    :subII_of_IV => "Gb7",
-    :subV7_of_IV => "B7",
-    :subII_of_V => "Abmin7",
-    :subV7_of_V => "Db7",
-    :subII_of_VI => "Bbmin7",
-    :subV7_of_VI => "Eb7"
+    :sub_II => "Dbmin7",
+    :sub_V7 => "Gb7",
+    :sub_II_of_II => "Ebmin7",
+    :sub_V7_of_II => "Ab7",
+    :sub_II_of_III => "Fmin7",
+    :sub_V7_of_III => "Bb7",
+    :sub_II_of_IV => "Gb7",
+    :sub_V7_of_IV => "B7",
+    :sub_II_of_V => "Abmin7",
+    :sub_V7_of_V => "Db7",
+    :sub_II_of_VI => "Bbmin7",
+    :sub_V7_of_VI => "Eb7"
     }
   end
 end
