@@ -115,21 +115,6 @@ end
 chords = Chords.new
 songs = Songs.new
 
-print songs.test_song_2
+print songs.confirmation
 puts ""
-# puts "First Pass:"
-# first_pass = first_pass_analysis(songs.test_song_2, chords.key_of_c)
-# print first_pass
-# with_dominants = resolve_dominants(first_pass, chords.key_of_c)
-# puts ""
-# puts "With Dominants:"
-# print with_dominants
-# with_substitute_dominants = resolve_substitute_dominants(with_dominants, chords.key_of_c)
-# puts ""
-# puts "With Substitute Dominants"
-# print with_substitute_dominants
-# puts ""
-# puts "With Subdominants"
-# with_subdominants = resolve_subdominants(with_substitute_dominants, chords.key_of_c)
-# print with_subdominants
-print analyze(songs.test_song_2, chords.key_of_c)
+print analyze(songs.confirmation, chords.key_of_f)
