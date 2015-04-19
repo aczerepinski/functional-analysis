@@ -1,0 +1,2 @@
+##FUNCTIONAL ANALYSIS
+This is a collection of methods that analyze, transpose, and otherwise modify musical chord changes. Some of the challenges and considerations related to the development of these methods are detailed on my website, adamcz.com/blog.html.

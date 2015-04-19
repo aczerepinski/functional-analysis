@@ -112,9 +112,3 @@ def analyze(song, key)
   with_sub_subdominants = resolve_substitute_subdominants(with_subdominants, key)
   with_sub_subdominants
 end
-chords = Chords.new
-songs = Songs.new
-
-print songs.confirmation
-puts ""
-print analyze(songs.confirmation, chords.key_of_f)
